@@ -18,16 +18,10 @@ const languageList = [
 
 function App() {
   const [data, setData] = useState();
-  const { register, handleSubmit, formState, control } = useForm({
+  const { register, handleSubmit, formState: { errors }, control } = useForm({
     resolver: yupResolver(schema)
   });
-
-  const { field } = useController({ name: 'language', control });
-  const { value: langValue, onChange: langOnChange, ...restLangField } = field;
-
-  // const { field: { value: langValue, onChange: langOnChange, ...restLangField } } = useController({ name: 'language', control });
-
-  const { errors } = formState;
+  const { field: { value: langValue, onChange: langOnChange, ...restLangField } } = useController({ name: 'language', control });
 
   const onSubmit = (formData) => {
     setData({ ...formData });
